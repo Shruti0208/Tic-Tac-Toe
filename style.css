@@ -1,0 +1,30 @@
+body{
+    font-family: "Arial", sans-serif;
+
+}
+
+section{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center; 
+}
+.game-container{
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: repeat(3, 10vw);
+    grid-template-rows: repeat(3, 10vw);
+    margin: auto ;
+}
+.cell{
+    border: 2px solid;
+    cursor: pointer;
+    font-size: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#winningMessage{
+    font-family: 'Lato', sans-serif;
+    font-size: 5vw;
+}
