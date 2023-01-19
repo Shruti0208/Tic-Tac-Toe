@@ -1,12 +1,14 @@
 
 var cur=0;
 var arr=[0,0,0,0,0,0,0,0,0];
-var response=[0,0,0,0,0,0,0,0,0];
+var response=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var temp=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
 var n=document.querySelectorAll(".cell").length;
 for(let i=0;i<n;i++)
 {   
     document.querySelectorAll(".cell")[i].addEventListener("click",function()
     {  if(arr[i]==0)
+        
         {if(cur%2==0)
         {   
             document.querySelectorAll(".cell")[i].innerHTML="O";
@@ -14,9 +16,24 @@ for(let i=0;i<n;i++)
             
             arr[i]=1;
             cur++;
-            text="<button onclick='backtrack(cur,i)'> move " + cur + " on block "+ i+" </button>";
-            document.querySelector(".displayMoves").insertAdjacentHTML("afterend",text)
-            response[cur]=i;
+           
+            text="<button class=move"+cur+"> move " + cur + " on block "+ i+" </button>";
+            document.querySelector(".displayMoves").insertAdjacentHTML("beforeend",text)
+            response[cur-1]=i;
+            let temp=".move"+cur;
+            document.querySelector(temp).addEventListener("click",function()
+            {    let index=temp[temp.length-1]-1;
+
+                for(let i=index;i<n;i++)
+                {
+                    if(response[i]!==-1)
+                    {
+                        document.querySelectorAll(".cell")[response[i]].innerHTML="";
+            
+                    }
+                }
+                
+            });
         }
         else{
            
@@ -25,9 +42,25 @@ for(let i=0;i<n;i++)
             
             arr[i]=-1;
             cur++;
-            text="<button onclick='backtrack(cur,i)'> move " + cur + " on block "+ i+" </button>";
-            document.querySelector(".displayMoves").insertAdjacentHTML("afterend",text)
-            response[cur]=i;
+            response[cur-1]=i;
+            text="<button class=move"+cur+"> move " + cur + " on block "+ i+" </button>";
+            document.querySelector(".displayMoves").insertAdjacentHTML("beforeend",text)
+            response[cur-1]=i;
+            let temp=".move"+cur;
+            document.querySelector(temp).addEventListener("click",function()
+            {    let index=temp[temp.length-1]-1;
+                
+                for(let i=index;i<n;i++)
+                {
+                    if(response[i]!==-1)
+                    {
+                        document.querySelectorAll(".cell")[response[i]].innerHTML="";
+            
+                    }
+                }
+                
+            });
+           
         }
     }
         if(cur>=5)
@@ -37,16 +70,7 @@ for(let i=0;i<n;i++)
     });
 
 }
-// function backtrack(index,value)
-// {
-//     for(let i=index;i<9;i++)
-//     {
-//         if(response[i]!==0)
-//         {
-//             document.querySelectorAll(".cell")[response[i]].innerHTML="";
-//         }
-//     }
-// }
+
 function win()
 {
     if(arr[0]==arr[1] && arr[1]==arr[2] || arr[0]==arr[4]&&arr[4]==arr[8] || arr[0]==arr[3] && arr[3]==arr[6])
@@ -118,5 +142,7 @@ function restart()
     {   arr[i]=0;
         document.querySelectorAll(".cell")[i].innerHTML="";
         winningMessage.innerHTML="";
+        
+        
     }
 }
