@@ -29,9 +29,12 @@ for(let i=0;i<n;i++)
                     if(response[i]!==-1)
                     {
                         document.querySelectorAll(".cell")[response[i]].innerHTML="";
-            
+                        arr[response[i]]=0;
+                        response[i]=-1;
                     }
+                    
                 }
+                
                 
             });
         }
@@ -143,6 +146,7 @@ function restart()
         document.querySelectorAll(".cell")[i].innerHTML="";
         winningMessage.innerHTML="";
         document.querySelector(".displayMoves").innerHTML="";
-        
+        response[i]=-1;
+        cur=0;
     }
 }
