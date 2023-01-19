@@ -142,7 +142,7 @@ function restart()
     {   arr[i]=0;
         document.querySelectorAll(".cell")[i].innerHTML="";
         winningMessage.innerHTML="";
-        
+        document.querySelector(".displayMoves").innerHTML="";
         
     }
 }
